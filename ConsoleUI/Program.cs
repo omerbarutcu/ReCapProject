@@ -28,11 +28,17 @@ namespace ConsoleUI
         {
             Console.WriteLine("--------Car Details-------");
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine(car.ColorName + " " + car.BrandName + " " + car.CarName + " : " + car.DailyPrice);
-                Console.WriteLine("-----------------");
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.ColorName + " " + car.BrandName + " " + car.CarName + " : " + car.DailyPrice);
+                    Console.WriteLine("-----------------");
+                }
             }
+            else { Console.WriteLine(result.Message); }
+            
         }
 
         private static void Brand()
@@ -44,7 +50,7 @@ namespace ConsoleUI
             Console.WriteLine("--------Brand-------");
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             //brandManager.Add(brand1);
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -59,7 +65,7 @@ namespace ConsoleUI
             Console.WriteLine("--------Color-------");
             ColorManager colorManager = new ColorManager(new EfColorDal());
             //colorManager.Add(color1);
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
             }
@@ -68,12 +74,12 @@ namespace ConsoleUI
         private static CarManager CarAdded()
         {
             Car car1 = new Car();
-            car1.CarId = 1;
-            car1.BrandId = 5;
-            car1.ColorId = 3;
-            car1.Description = "Polo 1.6";
-            car1.DailyPrice = 400;
-            car1.ModelYear = 2020;
+            car1.CarId = 4;
+            car1.BrandId = 2;
+            car1.ColorId = 2;
+            car1.Description = "Megane 1.4";
+            car1.DailyPrice = 350;
+            car1.ModelYear = 2018;
 
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Add(car1);

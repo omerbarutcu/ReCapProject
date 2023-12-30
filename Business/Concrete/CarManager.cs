@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,50 +21,51 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
             if (car.Description.Length<2 || car.DailyPrice<0) 
             {
-                Console.WriteLine("Araç ekleme işlemi başarısız !");
-                Console.WriteLine("Araç ismi en az 2 karakter olmalıdır.");
+                return new ErrorResult(Messages.CarNameInvalid);
             }
             else
             {
                 _carDal.Add(car);
+                return new SuccessResult(Messages.CarAdded);
             }
             
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
+            return new SuccessResult(Messages.CarDeleted);
         }
 
-        public Car Get(int id)
+        public IDataResult<Car> Get(int id)
         {
-            return _carDal.Get(c=>c.CarId==id);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id));
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.CarListed);
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
             if (car.Description.Length < 2 || car.DailyPrice < 0)
             {
-                Console.WriteLine("Araç güncelleme işlemi başarısız !");
-                Console.WriteLine("Araç ismi en az 2 karakter olmalıdır.");
+                return new ErrorResult(Messages.CarNameInvalid);
             }
             else
             {
                 _carDal.Update(car);
+                return new SuccessResult(Messages.CarUpdated);
             }
              
             
