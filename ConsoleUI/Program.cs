@@ -34,7 +34,7 @@ namespace ConsoleUI
 
             //RentalAdd();
             //RentalGetAll();
-            RentalDetails();
+            //RentalDetails();
         }
         private static void CarAdd()
         {
@@ -124,10 +124,10 @@ namespace ConsoleUI
         {
             Console.WriteLine("--------User Added-------");
             User user1 = new User();
-            user1.Id = 1;
-            user1.FirstName = "Ömer";
-            user1.LastName = "Barutçu";
-            user1.Email = "omerbrtc@hotmail.com";
+            user1.Id = 2;
+            user1.FirstName = "Özge";
+            user1.LastName = "Kınık";
+            user1.Email = "ozgekinik@hotmail.com";
             user1.Password = "1234";
 
             UserManager userManager = new UserManager(new EfUserDal());
@@ -150,9 +150,9 @@ namespace ConsoleUI
         {
             Console.WriteLine("--------CustomerAdd-------");
             Customer customer1 = new Customer();
-            customer1.Id = 1;
-            customer1.UserId = 1;
-            customer1.CompanyName = "Test.co";
+            customer1.Id = 2;
+            customer1.UserId = 2;
+            customer1.CompanyName = "Ozge LTD";
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             customerManager.Add(customer1);
         }
@@ -195,9 +195,9 @@ namespace ConsoleUI
         {
             Console.WriteLine("--------RentalAdd-------");
             Rental rental1 = new Rental();
-            rental1.Id = 1;
-            rental1.CarId = 2;
-            rental1.CustomerId = 1;
+            rental1.Id = 2;
+            rental1.CarId = 1;
+            rental1.CustomerId = 2;
             rental1.RentalDate = DateTime.Now;
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             rentalManager.Add(rental1);

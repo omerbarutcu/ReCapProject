@@ -16,24 +16,24 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (SqlServerDatabaseContext context = new SqlServerDatabaseContext())
             {
-                var result = from r in context.Rentals
-                             join c in context.Cars on r.CarId equals c.CarId
-                             join cu in context.Customers on r.CustomerId equals cu.UserId
-                             join b in context.Brands on c.BrandId equals b.BrandId
-                             join cl in context.Colors on c.ColorId equals cl.ColorId
-                             join u in context.Users on cu.UserId equals u.Id
+                var result = from rent in context.Rentals
+                             join car in context.Cars on rent.CarId equals car.CarId
+                             join customer in context.Customers on rent.CustomerId equals customer.UserId
+                             join user in context.Users on customer.UserId equals user.Id
+                             join brand in context.Brands on car.BrandId equals brand.BrandId
+                             join color in context.Colors on car.ColorId equals color.ColorId
                              select new RentalDetailDto
                              {
-                                 RentalId = r.Id,
-                                 CarColorName = cl.ColorName,
-                                 CarBrandName = b.BrandName,
-                                 CarDescription = c.Description,
-                                 CarModelYear = c.ModelYear,
-                                 CustomerFirstName = u.FirstName,
-                                 CustomerLastName = u.LastName,
-                                 CustomerEmail = u.Email,
-                                 RentDate = r.RentalDate,
-                                 ReturnDate = r.ReturnDate
+                                 RentalId = rent.Id,
+                                 CarColorName = color.ColorName,
+                                 CarBrandName = brand.BrandName,
+                                 CarDescription = car.Description,
+                                 CarModelYear = car.ModelYear,
+                                 CustomerFirstName = user.FirstName,
+                                 CustomerLastName = user.LastName,
+                                 CustomerEmail = user.Email,
+                                 RentDate = rent.RentalDate,
+                                 ReturnDate = rent.ReturnDate
                              };
                 return result.ToList();
             }
