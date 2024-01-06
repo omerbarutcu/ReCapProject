@@ -1,12 +1,6 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System;
-using System.Net.Http.Headers;
-using Entities.DTOs;
 
 namespace ConsoleUI
 {
@@ -24,9 +18,6 @@ namespace ConsoleUI
 
             //BrandAdd();
             //BrandGetAll();
-
-            //UserAdd();
-            //UserGetAll();
 
             //CustomerAdd();
             //CustomerGetAll();
@@ -118,32 +109,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine(brand.BrandName);
             }
-        }
-
-        private static void UserAdd()
-        {
-            Console.WriteLine("--------User Added-------");
-            User user1 = new User();
-            user1.Id = 2;
-            user1.FirstName = "Özge";
-            user1.LastName = "Kınık";
-            user1.Email = "ozgekinik@hotmail.com";
-            user1.Password = "1234";
-
-            UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(user1);
-        }
-
-        private static void UserGetAll()
-        {
-            Console.WriteLine("--------UserGetAll-------");
-            UserManager userManager = new UserManager(new EfUserDal());
-
-            foreach (var user in userManager.GetAll().Data)
-            {
-                Console.WriteLine("First Name: {0}, Last Name: {1}, Email: {2}", user.FirstName, user.LastName, user.Email);
-            }
-            Console.WriteLine(userManager.GetAll().Message);
         }
 
         private static void CustomerAdd()
