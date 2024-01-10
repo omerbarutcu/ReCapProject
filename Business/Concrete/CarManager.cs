@@ -40,8 +40,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
-        [CacheAspect(duration:60)]
-        public IDataResult<Car> Get(int id)
+        [CacheAspect(duration: 60)]
+        public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id));
         }
@@ -56,6 +56,48 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
+        }
+
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandIdWithDetails(int brandId)
+        {
+            List<CarDetailDto> result = _carDal.GetCarDetails(c => c.BrandId == brandId);
+            if (result == null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>();
+            }
+            else
+            {
+                return new SuccessDataResult<List<CarDetailDto>>(result);
+            }
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByColorAndBrand(int colorId, int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarByColorAndBrand(colorId, brandId));
+        }
+
+        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByColorIdWithDetails(int colorId)
+        {
+
+            List<CarDetailDto> result = _carDal.GetCarDetails(c => c.ColorId == colorId);
+            if (result == null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>();
+            }
+            else
+            {
+                return new SuccessDataResult<List<CarDetailDto>>(result);
+            }
         }
 
         [ValidationAspect(typeof(CarValidator))]

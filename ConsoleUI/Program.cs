@@ -192,7 +192,7 @@ namespace ConsoleUI
                         rental.CarModelYear,
                         rental.CarColorName,
                         rental.CarBrandName,
-                        rental.CarDescription,
+                        rental.CarName,
                         rental.CustomerFirstName,
                         rental.CustomerLastName,
                         rental.CustomerEmail,

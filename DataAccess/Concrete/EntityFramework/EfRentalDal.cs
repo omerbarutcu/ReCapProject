@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -22,7 +23,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  RentalId = rent.Id,
                                  CarColorName = color.ColorName,
                                  CarBrandName = brand.BrandName,
-                                 CarDescription = car.Description,
+                                 CarName = car.CarName,
+                                 DailyPrice = car.DailyPrice,
                                  CarModelYear = car.ModelYear,
                                  CustomerFirstName = user.FirstName,
                                  CustomerLastName = user.LastName,

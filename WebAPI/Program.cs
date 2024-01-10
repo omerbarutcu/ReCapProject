@@ -30,7 +30,7 @@ namespace WebAPI
             // call builder.Populate(), that happens in AutofacServiceProviderFactory.
             builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
             builder.RegisterModule(new AutofacBusinessModule()));
-
+            builder.Services.AddCors();
 
             var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -63,6 +63,7 @@ namespace WebAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseAuthentication(); // Key

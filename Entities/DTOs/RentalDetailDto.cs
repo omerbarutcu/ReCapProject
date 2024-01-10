@@ -13,7 +13,8 @@ namespace Entities.DTOs
         public string CarColorName { get; set; }
         public string CarBrandName { get; set; }
         public decimal CarModelYear { get; set; }
-        public string CarDescription { get; set; }
+        public string CarName { get; set; }
+        public decimal DailyPrice { get; set; }
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
         public string CustomerEmail { get; set; }
